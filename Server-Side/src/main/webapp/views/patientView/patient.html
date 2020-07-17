@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="#{locale.language}">
+<head th:fragment="headerfilespatient">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" th:href="#{bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="#{bootstrap-grid.min.css}"/>
+    <link rel="stylesheet" th:href="#{bootstrap-reboot.min.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/app/app.css">
+    <link rel="stylesheet" href="/views/patientView/patient.css">
+    <!---->
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="#">Hidden brand</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+</header>
+<br/>
+<div class="container gedf-wrapper">
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="card hovercard">
+                <div class="cardheader" style="background-image: url('/static/Img/mbr-1620x1080.jpg')">
+
+                </div>
+                <div class="avatar">
+                    <img alt="" src="/static/Img/omid.jpg">
+                </div>
+                <div class="info">
+                    <div class="title">
+                        <a th:text="${session.patient.getFirstName() + ' ' + session.patient.getLastName()}"
+                           href="/Patient/index"></a>
+                    </div>
+                    <div class="desc">Passionate designer</div>
+                    <div class="desc">Curious developer</div>
+                    <div class="desc">Tech geek</div>
+                </div>
+                <div class="bottom">
+                    <a class="btn btn-primary btn-twitter btn-sm" href="">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a class="btn btn-danger btn-sm" rel="publisher"
+                       href="">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                    <a class="btn btn-primary btn-sm" rel="publisher"
+                       href="">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a class="btn btn-warning btn-sm" rel="publisher" href="">
+                        <i class="fa fa-behance"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6  gedf-main">
+            <!--- \\\\\\\Post-->
+            <div class="card gedf-card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                               aria-controls="posts" aria-selected="true">Make
+                                a publication</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
+                               aria-selected="false" href="#images">Images</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                             aria-labelledby="posts-tab">
+                            <div class="form-group">
+                                <label class="sr-only" for="fileText">post</label>
+                                <textarea class="form-control" id="fileText" rows="3"
+                                          placeholder="What are you thinking?"></textarea>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile"
+                                           multiple="multiple">
+                                    <label class="custom-file-label" for="customFile">Upload image</label>
+                                </div>
+                            </div>
+                            <div class="py-4"></div>
+                        </div>
+                    </div>
+                    <div class="btn-toolbar justify-content-between">
+                        <div class="btn-group">
+                            <input type="submit" onclick="postConfirm()" class="btn btn-primary" value="share"/>
+                        </div>
+                        <div class="btn-group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                <i class="fa fa-globe"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Post /////-->
+
+            <!-- TODO : create loop here-->
+            <!--- \\\\\\\Post-->
+            <div class="card gedf-card" id="patientPost" th:if="${!fileModuleBeanArrayList.isEmpty()}">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mr-2">
+                                <img class="rounded-circle" width="45" id="profileImgPost" src="/static/Img/omid.jpg" alt="">
+                            </div>
+                            <div class="ml-2">
+                                <div class="h5 m-0" id="usernamePost">@LeeCross</div>
+                                <div class="h7 text-muted"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="dropdown">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                    <a class="dropdown-item" href="#">Save</a>
+                                    <a class="dropdown-item" href="#">Hide</a>
+                                    <a class="dropdown-item" href="#">Report</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="text-muted h7 mb-2" id="postCreateDate"><i class="fa fa-clock-o"></i> Hace 40 min</div>
+                    <a class="card-link" href="#">
+                        <img id="imgPost" src="/static/Img/mbr-1620x1080.jpg" class="card-img-top" alt="...">
+                    </a>
+
+                    <p class="card-text" id="postText"> Put a text post here
+                        <a href="#" target="_blank">put a link</a>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                    <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                </div>
+            </div>
+            <!-- Post /////-->
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+                <img src="/static/Img/mbr-1620x1080.jpg" class="card-img-top" alt="...">
+
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        the
+                        card's
+                        content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+                <div class="card-body">
+                    <a href="/Account/Login?logout" class="card-link">خروج</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div>
+    <p th:text="${session.patient.getUsername()}"></p>
+</div>
+
+<footer>
+    <div class="navbar fixed-bottom navbar-light bg-dark">
+        <div class="container">
+            <p class="navbar-text pull-left">© 2014 - Site Built By Mr. M.
+                <a href="http://tinyurl.com/tbvalid" target="_blank">HTML 5 Validation</a>
+            </p>
+
+            <a href="http://youtu.be/zJahlKPCL9g" class="navbar-btn btn-danger btn pull-right">
+                <span class="glyphicon glyphicon-star"></span>  Subscribe on YouTube</a>
+        </div>
+    </div>
+</footer>
+
+<th:block th:fragment="footerfilespatient">
+    <script src="/static/js/lib/jquery.min.js"></script>
+    <script src="/static/js/lib/bootstrap.bundle.min.js"></script>
+    <script th:src="#{bootstrap.min.js}"></script>
+    <script src="/static/js/lib/jquery.touch-swipe.min.js"></script>
+    <script src="/static/js/app/app.js"></script>
+    <script src="/views/patientView/patient.js"></script>
+</th:block>
+<script src="/views/patientView/patient.js"></script>
+</body>
+</html>
